@@ -30,9 +30,9 @@ To reduce the total processing time, you can partition jsonl files to multiple p
 ### Minhash LSH
 #### Generate Minhash
 Here is an exmaple command to run Generate Minhash
-'''
+```
 python3 deduplication/minhash_lsh/generate_minhash.py --input_dir input_dir --output_dir output_dir --workers num_workers --content_field_name content_field_name
-'''
+```
 where input_dir is dirtory to save jsonl files, output_dir is the directory to save minhash value, num_worker is  the total number of processes executing the job and content_field_name is the field name of content in jsonl file.
 
 #### Gereate Duplicate Pairs
