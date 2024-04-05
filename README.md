@@ -1,6 +1,6 @@
 # Chinese-Tiny-LLM
 
-[**🤗 MAP-CC**](https://huggingface.co/datasets/m-a-p/MAP-CC) | [**🤗 CHC-Bench**](https://huggingface.co/datasets/m-a-p/CHC_Bench) | [**🤗 CT-LLM**](https://huggingface.co/collections/m-a-p/chinese-tiny-llm-660d0133dff6856f94ce0fc6) | [**📖 arXiv**]() | [**GitHub**](https://github.com/XinrunDu/Chinese-Tiny-LLM)
+[**🤗 MAP-CC**](https://huggingface.co/datasets/m-a-p/MAP-CC) | [**🤗 CHC-Bench**](https://huggingface.co/datasets/m-a-p/CHC-Bench) | [**🤗 CT-LLM**](https://huggingface.co/collections/m-a-p/chinese-tiny-llm-660d0133dff6856f94ce0fc6) | [**📖 arXiv**]() | [**GitHub**](https://github.com/XinrunDu/Chinese-Tiny-LLM)
 
 This repository contains our suite of procedures for cleaning Chinese web corpora and pre-training code.
 
