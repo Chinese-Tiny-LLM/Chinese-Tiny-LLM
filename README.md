@@ -14,6 +14,18 @@ We introduce CT-LLM, a 2B parameter language model, marking a shift towards focu
 
 - **CT-LLM** The first Chinese-centric large language model, both pre-training and fine-tuned primarily on Chinese corpora, offers significant insights into potential biases, Chinese language ability, and multilingual adaptability.
 
+## Filter
+You first need to download fasttext model in the filter directory. The download [link](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin). The command example is 
+```
+wget -P https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin
+```
+
+Once you download the model bin of fasttext, then you use command like follows to filter text.
+```
+python3 filter/filter.py --input_data input_dir --output_dir output_dir --success_dir success_dir --log_dir log_dir --worker num_worker
+```
+where input_dir is the direcotry containing jsonl files, output_dir is the directory to store the filtered jsonl files, success_dir is dirtory to save files about whether files are processed successfully, log_dir is the directory to save logs and num_worker is the total number of process to execute the job in parallel. 
+
 ## Deduplication
 
 ### Full Text Deduplication
