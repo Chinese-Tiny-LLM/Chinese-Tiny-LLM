@@ -17,7 +17,7 @@ We introduce CT-LLM, a 2B parameter language model, marking a shift towards focu
 ## Filter
 You first need to download fasttext model in the filter directory. The download [link](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin). The command example is 
 ```
-wget -P https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin
+wget -P filter/ https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin
 ```
 
 Once you download the model bin of fasttext, then you use command like follows to filter text.
