@@ -99,6 +99,13 @@ Contact: ```ge.zhang@uwaterloo.ca; duxinrun2000@gmail.com```
 
 Our commitment to responsible data sharing and the security of our academic tools is paramount. We thank you for your cooperation in maintaining the ethical use of this technology.
 
+## License
+
+The MAP-CC Dataset is made available under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License ([CC BY-NC-ND 4.0](LICENSE)).
+
+By using the MAP-CC Dataset, you accept and agree to be bound by the terms and conditions of the CC BY-NC-ND 4.0 License. This license allows users to share (copy and redistribute the material in any medium or format) the MAP-CC Dataset for non-commercial purposes only, and with no modifications or derivatives, as long as proper attribution is given to the creators. For further details, please refer to the [LICENSE](LICENSE) file.
+
+We chose the CC BY-NC-ND 4.0 License for the MAP-CC Dataset to facilitate academic and educational use, promoting the spread of knowledge while protecting the work of the creators from unauthorized commercial use or modification.
 
 ## Citation
 ```
