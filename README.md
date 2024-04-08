@@ -87,4 +87,28 @@ where input_dir is the directory containing the jsonl files, output_dir is the d
 
 Coming soon...
 
+## Disclaimer
+
+This model, developed for academic purposes, employs rigorously compliance-checked training data to uphold the highest standards of integrity and compliance. Despite our efforts, the inherent complexities of data and the broad spectrum of model applications prevent us from ensuring absolute accuracy or appropriateness of the model outputs in every scenario.
+
+It is essential to highlight that our model and its associated training data are intended solely for scholarly research. We explicitly disclaim any liability for problems that may arise from improper use, interpretation errors, unlawful activities, the dissemination of false information, or any data security issues related to the utilization of our model or its training data.
+
+We strongly encourage users to report any concerns related to data misuse, security breaches, or potential infringement issues directly to us for immediate investigation and resolution.
+
+Contact: ```ge.zhang@uwaterloo.ca; duxinrun2000@gmail.com```
+
+Our commitment to responsible data sharing and the security of our academic tools is paramount. We thank you for your cooperation in maintaining the ethical use of this technology.
+
+
+## Citation
+```
+@misc{du2024chinese,
+      title={Chinese Tiny LLM: Pretraining a Chinese-Centric Large Language Model}, 
+      author={Xinrun Du and Zhouliang Yu and Songyang Gao and Ding Pan and Yuyang Cheng and Ziyang Ma and Ruibin Yuan and Xingwei Qu and Jiaheng Liu and Tianyu Zheng and Xinchen Luo and Guorui Zhou and Binhang Yuan and Wenhu Chen and Jie Fu and Ge Zhang},
+      year={2024},
+      eprint={2404.04167},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
