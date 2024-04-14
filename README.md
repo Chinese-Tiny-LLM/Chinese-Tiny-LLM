@@ -30,7 +30,7 @@ where input_dir is the direcotry containing jsonl files, output_dir is the direc
 
 ### Full Text Deduplication
 
-Here is an exmaple command to run full text deduplication
+Here is an example command to run full text deduplication
 ```
 python3 deduplication/full_text_dedup/full_text_dedup.py --input_dir input_dir --output_dir output_dir --content_field_name content_field_name
 ```
@@ -41,7 +41,7 @@ To reduce the total processing time, you can partition jsonl files to multiple p
 
 ### Minhash LSH
 #### Generate Minhash
-Here is an exmaple command to run Generate Minhash
+Here is an example command to run Generate Minhash
 ```
 python3 deduplication/minhash_lsh/generate_minhash.py --input_dir input_dir --output_dir output_dir --workers num_workers --content_field_name content_field_name
 ```
