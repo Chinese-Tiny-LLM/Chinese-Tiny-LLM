@@ -33,19 +33,19 @@ def unify_format(text):
     # Construct the mapping table from half-angle symbols to full-angle symbols
     halfwidth_symbols = ".!\"\"#$%&''()*+,-/:;<=>?@[\\]^_`{|}~"
     fullwidth_symbols = "。！“”＃＄％＆‘’（）＊＋，－／：；＜＝＞？＠［＼］＾＿｀｛｜｝～"
-    translation_table = str.maketrans(fullwidth_symbols, halfwidth_symbols)
+    translation_table = str.maketrans(halfwidth_symbols, fullwidth_symbols)
     # translate to realize conversion
     fullwidth_text = text.translate(translation_table)
     return True, fullwidth_text, None
 
-def url_filter(line, forbidden_urls):
+def url_filter(line, forbidden_urls, forbidden_domains):
     text = line[CONTENT_FIELD]
 
     url = line['url'].strip()
     if url.startswith(('http://', 'https://')):
-        doamin = url.split('/')[2]
-        if doamin in forbidden_urls:
-            return False, None, {'forbidden url': doamin}
+        domain = url.split('/')[2]
+        if domain in forbidden_domains:
+            return False, None, {'forbidden domain': domain}
     else:
         for forbidden_url in forbidden_urls:
             if forbidden_url in line['url']:
@@ -335,7 +335,7 @@ def count_ngram_duplicates(text, n):
 
 
     
-def filter_single_line(line, index, args, fo, fl, forbidden_urls):
+def filter_single_line(line, index, args, fo, fl, forbidden_urls, forbidden_domains):
     line1 = json.loads(line)
     text = line1[CONTENT_FIELD]
 
@@ -369,7 +369,7 @@ def filter_single_line(line, index, args, fo, fl, forbidden_urls):
 
     # Check whether the text contains the urls in the blacklists, and returns the judgment and the text after removing the links
     try:
-        retain_or_not, url_filtered_text, flag = url_filter(line1, forbidden_urls)
+        retain_or_not, url_filtered_text, flag = url_filter(line1, forbidden_urls, forbidden_domains)
     except:
         errMsg["except"] = "url_filter"
         json_line = json.dumps(errMsg, ensure_ascii=False)
@@ -464,9 +464,9 @@ def filter_one_file(file_path, output_file_path, log_file_path, sucess_path, arg
     # check if the html page is related to forbidden urls
     forbidden_urls = set()
     for f in files:
-        file_name = url_path + '/' + f + '/' + 'urls'
+        forbidden_url_file_name = url_path + '/' + f + '/' + 'urls'
         try:
-            with open(file_name, 'r') as fp:
+            with open(forbidden_url_file_name, 'r') as fp:
                 for forbidden_url in fp.readlines():
                     forbidden_url = forbidden_url.replace('\n', '')
                     forbidden_urls.add(forbidden_url)
@@ -474,13 +474,28 @@ def filter_one_file(file_path, output_file_path, log_file_path, sucess_path, arg
             continue
         except NotADirectoryError as e:
             continue
+
+    # check if the html page is related to forbidden domains
+    forbidden_domains = set()
+    for f in files:
+        forbidden_domain_file_name = url_path + '/' + f + '/' + 'domains'
+        try:
+            with open(forbidden_domain_file_name, 'r') as fp:
+                for forbidden_domain in fp.readlines():
+                    forbidden_domain = forbidden_domain.replace('\n', '')
+                    forbidden_domains.add(forbidden_domain)
+        except FileNotFoundError as e:
+            continue
+        except NotADirectoryError as e:
+            continue
+
     with open(file_path, 'r') as f, open(output_file_path, 'wt', encoding='UTF-8') as fo, open(log_file_path, 'wt', encoding='UTF-8') as fl:
         sdict = {'start': datetime.now().isoformat(), "fpath": file_path}
         jsl = json.dumps(sdict)
         fl.write(f"{jsl}\n")
         try:
             for index, line in enumerate(f):
-                filter_single_line(line, index, args, fo, fl, forbidden_urls)
+                filter_single_line(line, index, args, fo, fl, forbidden_urls, forbidden_domains)
         except Exception as e:
             rule = "unknow type"
             try:
