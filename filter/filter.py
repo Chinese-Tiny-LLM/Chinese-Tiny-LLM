@@ -11,6 +11,7 @@ import multiprocessing
 from datetime import datetime
 from bad_url_words import STRICT_BAD_URL_WORDS, HARD_BAD_URL_WORDS
 from collections import Counter
+from utils import Trie, remove_url_head
 
 
 CONTENT_FIELD = "raw_content"
@@ -30,7 +31,7 @@ def unify_format(text):
     if ratio > 0.1:
         return False, None, {'bracket ratio': ratio}
 
-    # Construct the mapping table from half-angle symbols to full-angle symbols
+    # Construct the mapping table from full-angle symbols to half-angle symbols
     halfwidth_symbols = ".!\"\"#$%&''()*+,-/:;<=>?@[\\]^_`{|}~"
     fullwidth_symbols = "。！“”＃＄％＆‘’（）＊＋，－／：；＜＝＞？＠［＼］＾＿｀｛｜｝～"
     translation_table = str.maketrans(fullwidth_symbols, halfwidth_symbols)
@@ -38,18 +39,13 @@ def unify_format(text):
     fullwidth_text = text.translate(translation_table)
     return True, fullwidth_text, None
 
-def url_filter(line, forbidden_urls):
+def url_filter(line, forbidden_urls_trie):
     text = line[CONTENT_FIELD]
 
     url = line['url'].strip()
-    if url.startswith(('http://', 'https://')):
-        doamin = url.split('/')[2]
-        if doamin in forbidden_urls:
-            return False, None, {'forbidden url': doamin}
-    else:
-        for forbidden_url in forbidden_urls:
-            if forbidden_url in line['url']:
-                return False, None, {'forbidden url': forbidden_url}
+    url = remove_url_head(url)
+    if forbidden_urls_trie.search(url):
+        return False, None, {'forbidden url': url}
         
 
     # remove links in the text
@@ -462,14 +458,14 @@ def filter_one_file(file_path, output_file_path, log_file_path, sucess_path, arg
     url_path = args.bad_url_dir
     files = os.listdir(url_path)  # Iterate through the file path, output directory file names and folder names
     # check if the html page is related to forbidden urls
-    forbidden_urls = set()
+    forbidden_urls_trie = Trie()
     for f in files:
         file_name = url_path + '/' + f + '/' + 'urls'
         try:
             with open(file_name, 'r') as fp:
                 for forbidden_url in fp.readlines():
-                    forbidden_url = forbidden_url.replace('\n', '')
-                    forbidden_urls.add(forbidden_url)
+                    forbidden_url = remove_url_head(forbidden_url.strip())
+                    forbidden_urls_trie.insert(forbidden_url)
         except FileNotFoundError as e:
             continue
         except NotADirectoryError as e:
@@ -480,7 +476,7 @@ def filter_one_file(file_path, output_file_path, log_file_path, sucess_path, arg
         fl.write(f"{jsl}\n")
         try:
             for index, line in enumerate(f):
-                filter_single_line(line, index, args, fo, fl, forbidden_urls)
+                filter_single_line(line, index, args, fo, fl, forbidden_urls_trie)
         except Exception as e:
             rule = "unknow type"
             try:
