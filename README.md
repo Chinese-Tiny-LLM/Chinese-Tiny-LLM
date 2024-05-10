@@ -4,6 +4,11 @@
 
 This repository contains our suite of procedures for cleaning Chinese web corpora and pre-training code.
 
+## News
+
+🔥[2024/5/10]: 
+The pretraining code has been released, and we also invite you to follow [Neo](https://github.com/multimodal-art-projection/MAP-NEO). 😆
+
 ## Overview
 
 We introduce CT-LLM, a 2B parameter language model, marking a shift towards focusing on the Chinese language for LLM development. Starting from scratch, CT-LLM primarily uses Chinese data from a 1,200 billion token corpus, including 800 billion Chinese, 300 billion English, and 100 billion code tokens. This mix enhances its Chinese processing abilities, further improved by alignment techniques. CT-LLM shows excellent performance in Chinese language tasks on the CHC-Bench and is also adept in English through SFT. This approach challenges the norm of relying on English corpora for LLM training, expanding training methodologies. By open-sourcing CT-LLM's training process, including data processing and the Massive Appropriate Pretraining Chinese Corpus (MAP-CC), and introducing the Chinese Hard Case Benchmark (CHC-Bench), we encourage further research and innovation, aiming for more inclusive and adaptable language models.
@@ -85,7 +90,8 @@ where input_dir is the directory containing the jsonl files, output_dir is the d
 
 ## Pre-training
 
-Coming soon...
+For detailed information and access to the pre-training code used in this project, please refer to [Neo](https://github.com/multimodal-art-projection/Megatron-LM-NEO/tree/5215161b12485e5f09eb93b3997d7f3233d9fda9/neo). This repo contains all the necessary code and configurations needed to replicate the pre-training process.  
+Welcome to follow [Neo](https://github.com/multimodal-art-projection/MAP-NEO).
 
 ## Disclaimer
 
